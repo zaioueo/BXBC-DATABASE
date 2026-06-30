@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHARACTERS</title>
+    <style>
+        /* ⚠️ 核心淡入動畫：全網頁一打開就從透明慢慢亮起 */
+        body { background-color: #0c0805; color: #b37446; font-family: 'Courier New', monospace; margin: 0; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; box-sizing: border-box; transition: opacity 0.4s ease-in-out; opacity: 1; animation: pageFadeIn 0.4s ease-in-out forwards; }
+        @keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .header { text-align: center; margin-bottom: 20px; }
+        .header h1 { font-size: 24px; margin: 0; letter-spacing: 2px; }
+        .nav-menu { display: block; white-space: nowrap; overflow-x: auto; max-width: 950px; width: 100%; margin-bottom: 30px; padding-bottom: 10px; text-align: center; -webkit-overflow-scrolling: touch; }
+        .nav-menu::-webkit-scrollbar { display: none; }
+        .nav-btn { display: inline-block; background-color: transparent; border: 1px solid #b37446; color: #b37446; padding: 6px 12px; font-family: inherit; font-size: 11px; font-weight: bold; cursor: pointer; text-decoration: none; transition: 0.3s; margin: 0 5px; }
+        .nav-btn:hover, .nav-btn.active { background-color: #b37446; color: #0c0805; box-shadow: 0 0 15px rgba(179, 116, 70, 0.4); }
+        .wiki-container { max-width: 950px; width: 100%; border: 1px solid #b37446; background-color: rgba(12, 8, 5, 0.95); padding: 25px; box-sizing: border-box; animation: breatheGlow 5s ease-in-out infinite; }
+        .wiki-layout { display: flex; flex-direction: column; gap: 30px; }
+        @media (min-width: 750px) { .wiki-layout { flex-direction: row; align-items: flex-start; } }
+        .wiki-infobox { flex: 1; background-color: #000000; border: 1px solid #b37446; max-width: 340px; width: 100%; margin: 0 auto; }
+        .infobox-title { background-color: #8a0020; color: #ffffff; font-size: 18px; font-weight: bold; text-align: center; padding: 10px; text-transform: uppercase; }
+        .infobox-section-header { background-color: #8a0020; color: #ffffff; font-size: 13px; font-weight: bold; text-align: center; padding: 5px; margin-top: 5px; }
+        .infobox-pfp-box { background-color: #000000; padding: 15px; display: flex; justify-content: center; }
+        .infobox-pfp { max-width: 100%; height: auto; max-height: 280px; object-fit: contain; }
+        .infobox-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .infobox-table tr { border-top: 1px solid #1a110a; }
+        .infobox-table td { padding: 8px 8px; vertical-align: top; color: #ffffff; }
+        .infobox-table td.label { font-weight: bold; color: #b37446; width: 38%; }
+        .lore-content-area { flex: 1.4; text-align: left; color: #d19a6a; position: relative; z-index: 1; }
+        .lore-content-area h2 { font-size: 20px; color: #b37446; border-bottom: 1px solid #b37446; padding-bottom: 5px; margin: 25px 0 10px 0; cursor: pointer; user-select: none; }
+        .lore-content-area h2:hover { color: #ffb066; }
+        .lore-content-area h2:first-child { margin-top: 0; }
+        .lore-content-area h3 { font-size: 15px; color: #ffb066; margin: 15px 0 5px 0; }
+        .lore-text { font-size: 14px; line-height: 1.6; white-space: pre-line; }
+        .list-spacing { margin: 5px 0; padding-left: 20px; line-height: 1.6; }
+        .small-note { font-size: 12px; opacity: 0.6; margin-top: 15px; line-height: 1.5; }
+        .quote-block { border-left: 3px solid #8a0020; padding-left: 15px; font-style: italic; margin: 30px 0 10px 0; color: #ff3333; font-size: 15px; font-weight: bold; }
+        .toggle-content { display: none; opacity: 0; transition: opacity 0.3s; }
+        .toggle-content.show { display: block; opacity: 1; }
+        @keyframes breatheGlow { 0%, 100% { box-shadow: 0 0 15px rgba(179, 116, 70, 0.15); border-color: rgba(179, 116, 70, 0.5); } 50% { box-shadow: 0 0 30px rgba(179, 116, 70, 0.45); border-color: rgba(179, 116, 70, 1); } }
+    </style>
+</head>
+<body>
+    <div class="header"><h1>CHARACTERS</h1></div>
+    <div class="nav-menu">
+        <!-- ⚠️ 核心：所有的 <a> 連結都改成了 onclick="fadeTo('網址')" 觸發淡出特效 -->
+        <a href="javascript:void(0)" onclick="fadeTo('characters.html')" class="nav-btn">< SELECTION MENU</a>
+        <a href="javascript:void(0)" onclick="fadeTo('bonabi.html')" class="nav-btn">HOLLY CALLAHAN</a>
+        <a href="javascript:void(0)" onclick="fadeTo('mangle.html')" class="nav-btn active">TRIXIE SHERMAN</a>
+        <a href="javascript:void(0)" onclick="fadeTo('char3.html')" class="nav-btn">CHARACTER_03</a>
+        <a href="javascript:void(0)" onclick="fadeTo('char4.html')" class="nav-btn">CHARACTER_04</a>
+        <a href="javascript:void(0)" onclick="fadeTo('char5.html')" class="nav-btn">CHARACTER_05</a>
+        <a href="javascript:void(0)" onclick="fadeTo('char6.html')" class="nav-btn">CHARACTER_06</a>
+        <a href="javascript:void(0)" onclick="fadeTo('char7.html')" class="nav-btn">CHARACTER_07</a>
+    </div>
+    <div class="wiki-container">
+        <div class="wiki-layout">
+            <div class="wiki-infobox">
+                <div class="infobox-title">Trixie Sherman</div>
+                <div class="infobox-pfp-box"><img src="pfp2.png" alt="PFP" class="infobox-pfp"></div>
+                <table class="infobox-table">
+                    <tr><td class="label">Name</td><td>Trixie Sherman</td></tr>
+                    <tr><td class="label">Aliases</td><td>Vixen, Vixie, The Mangle</td></tr>
+                    <tr><td class="label">Sex</td><td>Female</td></tr>
+                    <tr><td class="label">Age at Death</td><td>16</td></tr>
+                    <tr><td class="label">Died</td><td>1993 (FNAF 1 era)</td></tr>
+                    <tr><td class="label">Killed By</td><td>William Afton</td></tr>
+                </table>
+                <div class="infobox-section-header">Appearance</div>
+                <table class="infobox-table"><tr><td class="label">Status</td><td>Damaged / Active</td></tr></table>
+            </div>
+            <div class="lore-content-area">
+                <h1>Trixie Sherman</h1>
+                <h2 onclick="toggle(this)">Purpose:</h2>
+                <div class="toggle-content"><ul class='list-spacing'><li>Protect others.</li><li style="color: #ff3333; font-weight: bold;">Make William Afton pay.</li><li>Find her lost friends.</li></ul></div>
+                <h2 onclick="toggle(this)">Background:</h2>
+                <div class="toggle-content"><div class="lore-text">Trixie was a strange but friendly girl who always wanted to feel noticed and appreciated. She often talked to herself and feared being forgotten or abandoned. She became close friends with several children who would later possess animatronics, and her boyfriend, Oscar, disappeared alongside them. While searching for her missing friends, Trixie also disappeared and later became one of the animatronics.</div></div>
+                <h2 onclick="toggle(this)">Personality:</h2>
+                <div class="toggle-content"><h3>During the Day:</h3><ul class='list-spacing'><li>Friendly and social.</li><li>Protective of others.</li><li>Kind-hearted and well-meaning.</li></ul><h3>During the Night:</h3><ul class='list-spacing'><li>Aggressive and unstable.</li><li>Desperate for attention.</li><li>Driven by anger and revenge.</li></ul></div>
+                <h2 onclick="toggle(this)">Likes & Dislikes:</h2>
+                <div class="toggle-content"><table style="width:100%; font-size:14px;"><tr><td style="vertical-align:top;"><b>Likes:</b><ul class='list-spacing'><li>Oscar/Chuck (boyfriend).</li><li>Holly/Bonabi (friend).</li><li>Her fellow animatronics.</li></ul></td><td style="vertical-align:top;"><b>Dislikes:</b><ul class='list-spacing'><li>Being alone.</li><li>Feeling unloved.</li><li>Abandonment.</li><li>Being damaged or torn apart.</li><li>William Afton.</li></ul></td></tr></table></div>
+                <h2 onclick="toggle(this)">Relationships:</h2>
+                <div class="toggle-content"><div class="lore-text"><b>Oscar (Chuck):</b> Her boyfriend. She deeply cares about him and wants to discover the truth about his death.<br><br><b>Holly (Bonabi):</b> One of her closest friends. She still struggles to accept what happened to Holly and everyone else.</div></div>
+                <h2 onclick="toggle(this)">Notes:</h2>
+                <div class="toggle-content"><div class="small-note">• Often talks to herself, as if she has two minds.<br>• Has a strong need to feel loved and accepted.<br>• Vixen was her favorite animatronic before her death.<br>• Dislikes bright lights at night.<br>• Makes distorted, garbled sounds when angry or damaged.</div></div>
+                <div class="quote-block">&gt; "WHY WAS I MADE ONLY TO FALL APART LIKE THIS?"</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggle(e){e.nextElementSibling.classList.toggle("show")}
+        // ⚠️ 核心淡出轉址程式
+        function fadeTo(url) {
+            document.body.style.opacity = "0";
+            setTimeout(function() { window.location.href = url; }, 400);
+        }
+    </script>
+</body>
+</html>
