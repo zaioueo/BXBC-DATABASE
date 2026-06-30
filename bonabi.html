@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[ LORE_DATABASE ]</title>
+    <style>
+        body { background-color: #0c0805; color: #b37446; font-family: 'Courier New', monospace; margin: 0; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; box-sizing: border-box; }
+        .header { text-align: center; margin-bottom: 20px; }
+        .header h1 { font-size: 24px; margin: 0; letter-spacing: 2px; }
+        .nav-menu { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; width: 100%; max-width: 950px; }
+        .nav-btn { background-color: transparent; border: 1px solid #b37446; color: #b37446; padding: 6px 12px; font-family: inherit; font-size: 11px; font-weight: bold; cursor: pointer; text-decoration: none; transition: 0.3s; }
+        .nav-btn:hover, .nav-btn.active { background-color: #b37446; color: #0c0805; box-shadow: 0 0 15px rgba(179, 116, 70, 0.4); }
+        .wiki-container { max-width: 950px; width: 100%; border: 1px solid #b37446; background-color: rgba(12, 8, 5, 0.95); padding: 25px; box-sizing: border-box; animation: breatheGlow 5s ease-in-out infinite; }
+        .wiki-layout { display: flex; flex-direction: column; gap: 30px; }
+        @media (min-width: 750px) { .wiki-layout { flex-direction: row; align-items: flex-start; } }
+        .wiki-infobox { flex: 1; background-color: #000000; border: 1px solid #b37446; max-width: 340px; width: 100%; margin: 0 auto; }
+        .infobox-title { background-color: #8a0020; color: #ffffff; font-size: 18px; font-weight: bold; text-align: center; padding: 10px; text-transform: uppercase; }
+        .infobox-section-header { background-color: #8a0020; color: #ffffff; font-size: 13px; font-weight: bold; text-align: center; padding: 5px; margin-top: 5px; }
+        .infobox-pfp-box { background-color: #000000; padding: 15px; display: flex; justify-content: center; }
+        .infobox-pfp { max-width: 100%; height: auto; max-height: 280px; object-fit: contain; }
+        .infobox-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .infobox-table tr { border-top: 1px solid #1a110a; }
+        .infobox-table td { padding: 8px 8px; vertical-align: top; color: #ffffff; }
+        .infobox-table td.label { font-weight: bold; color: #b37446; width: 38%; }
+        .lore-content-area { flex: 1.4; text-align: left; color: #d19a6a; }
+        .lore-content-area h2 { font-size: 20px; color: #b37446; border-bottom: 1px solid #b37446; padding-bottom: 5px; margin: 25px 0 10px 0; cursor: pointer; user-select: none; }
+        .lore-content-area h2:hover { color: #ffb066; }
+        .lore-content-area h2:first-child { margin-top: 0; }
+        .lore-content-area h3 { font-size: 15px; color: #ffb066; margin: 15px 0 5px 0; }
+        .lore-text { font-size: 14px; line-height: 1.6; white-space: pre-line; }
+        .list-spacing { margin: 5px 0; padding-left: 20px; line-height: 1.6; }
+        .small-note { font-size: 12px; opacity: 0.6; margin-top: 15px; line-height: 1.5; }
+        .quote-block { border-left: 3px solid #8a0020; padding-left: 15px; font-style: italic; margin: 30px 0 10px 0; color: #ffffff; font-size: 15px; }
+        .toggle-content { display: none; opacity: 0; transition: opacity 0.3s; }
+        .toggle-content.show { display: block; opacity: 1; }
+        @keyframes breatheGlow { 0%, 100% { box-shadow: 0 0 15px rgba(179, 116, 70, 0.15); border-color: rgba(179, 116, 70, 0.5); } 50% { box-shadow: 0 0 30px rgba(179, 116, 70, 0.45); border-color: rgba(179, 116, 70, 1); } }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>[ CHARACTER_DATABASE ]</h1>
+    </div>
+
+    <div class="nav-menu">
+        <a href="bonabi.html" class="nav-btn active">BONABI</a>
+        <a href="char2.html" class="nav-btn">CHARACTER_02</a>
+        <a href="char3.html" class="nav-btn">CHARACTER_03</a>
+        <a href="char4.html" class="nav-btn">CHARACTER_04</a>
+        <a href="char5.html" class="nav-btn">CHARACTER_05</a>
+        <a href="char6.html" class="nav-btn">CHARACTER_06</a>
+        <a href="char7.html" class="nav-btn">CHARACTER_07</a>
+    </div>
+
+    <div class="wiki-container">
+        <div class="wiki-layout">
+            
+            <div class="wiki-infobox">
+                <div class="infobox-title">Bonabi</div>
+                <div class="infobox-pfp-box"><img src="pfp1.png" alt="PFP" class="infobox-pfp"></div>
+                <table class="infobox-table">
+                    <tr><td class="label">Name</td><td>Holly Callahan</td></tr>
+                    <tr><td class="label">Alias</td><td>Bonabi</td></tr>
+                    <tr><td class="label">Gender</td><td>Female</td></tr>
+                    <tr><td class="label">Age at Death</td><td>16</td></tr>
+                    <tr><td class="label">Died</td><td>1993 (FNaF 1 era)</td></tr>
+                    <tr><td class="label">Killed by</td><td>William Afton</td></tr>
+                </table>
+                <div class="infobox-section-header">Appearance</div>
+                <table class="infobox-table">
+                    <tr><td class="label">Species</td><td>Animatronic (Possessed)</td></tr>
+                </table>
+            </div>
+
+            <div class="lore-content-area">
+                <h1 style="color:#ffffff; margin:0 0 10px 0; font-size:24px;">Bonabi (Holly Callahan) UPDATED</h1>
+                
+                <h2 onclick="toggle(this)">Purpose:</h2>
+                <div class="toggle-content">
+                    <ul class='list-spacing'><li>Kill William Afton completely.</li><li>Protect and help her friends.</li></ul>
+                </div>
+
+                <h2 onclick="toggle(this)">Background:</h2>
+                <div class="toggle-content">
+                    <div class="lore-text">Holly lost her parents at a young age and lived with her older brother, Victor Callahan. She never liked animatronics and often complained about bright lights. After being murdered by William Afton, she became Bonabi and dedicated herself to revenge and protecting those she cared about.</div>
+                </div>
+
+                <h2 onclick="toggle(this)">Personality:</h2>
+                <div class="toggle-content">
+                    <h3>Bonabi (Day):</h3>
+                    <ul class='list-spacing'><li>Gentle and caring.</li><li>Loyal to friends.</li><li>Has good self-control.</li></ul>
+                    <h3>Holly (Night):</h3>
+                    <ul class='list-spacing'><li>Aggressive and emotional.</li><li>Obsessed with finding William.</li><li>Rarely appears during daytime.</li></ul>
+                </div>
+
+                <h2 onclick="toggle(this)">Likes & Dislikes:</h2>
+                <div class="toggle-content">
+                    <table style="width:100%; font-size:14px;">
+                        <tr>
+                            <td style="vertical-align:top;">
+                                <b>Likes:</b>
+                                <ul class='list-spacing'><li><i>Carrots</i></li><li><i>Amary (Bonnet)</i></li><li><i>Freddy, Bonnie, Chica, Foxy, Fredbear(Victor), Endo</i></li><li><i>Rabbits</i></li><li><i>Dark places</i></li></ul>
+                            </td>
+                            <td style="vertical-align:top;">
+                                <b>Dislikes:</b>
+                                <ul class='list-spacing'><li><i>Bright lights</i></li><li><i>Child killers</i></li><li><i>William Afton</i></li><li><i>Being separated from Amary</i></li><li><u>[REDACTED]</u></li></ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h2 onclick="toggle(this)">Relationships:</h2>
+                <div class="toggle-content">
+                    <div class="lore-text"><b>Victor Callahan:</b> Her older brother and one of the few who can calm Holly.<br><br><b>Amary (Bonnet):</b> Her closest friend. Holly is obsessed with finding her again.</div>
+                </div>
+
+                <h2 onclick="toggle(this)">Notes:</h2>
+                <div class="toggle-content">
+                    <div class="small-note">
+                        • Poor eyesight after death caused extreme sensitivity to light.<br>
+                        • Considered "crazy" by some, but still has self-control.<br>
+                        • Holly is more active and violent at night.<br>
+                        • Only Victor and Amary can reliably stop or calm Holly.<br>
+                        • She has developed a strange fixation on the name Adora.
+                    </div>
+                </div>
+
+                <div class="quote-block">&gt; "I'm not crazy. I just haven't found them yet."</div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // 簡化版切換函數：不需要再綁定複雜的 id，點擊即可開關
+        function toggle(el) {
+            const content = el.nextElementSibling;
+            content.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
