@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEM_OVERRIDE</title>
+    <style>
+        /* 這裡用 CSS 打造駭客、恐怖 ARG 的視覺風格 */
+        body {
+            background-color: #050505;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            border: 1px solid #00ff00;
+            padding: 30px;
+            box-shadow: 0 0 15px #00ff00;
+        }
+        input {
+            background-color: #000;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            padding: 10px;
+            font-size: 16px;
+            text-align: center;
+            outline: none;
+        }
+        button {
+            background-color: #00ff00;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #003300;
+            color: #00ff00;
+        }
+        .error { color: #ff0000; margin-top: 15px; }
+        .success { color: #00ffff; margin-top: 15px; font-size: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>[ ARCHIVE_LOCKED ]</h1>
+        <p>The Blockbears project has been corrupted.</p>
+        <p>Enter the decryption key to reveal the truth:</p>
+        
+        <!-- 輸入框與按鈕 -->
+        <input type="text" id="passwordInput" placeholder="Enter key...">
+        <button onclick="checkPassword()">DECRYPT</button>
+
+        <!-- 顯示結果的地方 -->
+        <div id="message"></div>
+    </div>
+
+    <script>
+        // 這裡是用 JavaScript 控制密碼邏輯
+        function checkPassword() {
+            // 取得使用者輸入的字串，並自動轉成小寫（防止大小寫判定錯誤）
+            const userInput = document.getElementById("passwordInput").value.toLowerCase().trim();
+            const messageDiv = document.getElementById("message");
+
+            // ⚠️ 這裡設定你的神祕密碼（現在預設是 "revive"）
+            const secretPassword = "revive"; 
+
+            if (userInput === secretPassword) {
+                // 密碼正確時觸發的內容
+                messageDiv.className = "success";
+                messageDiv.innerHTML = " ACCESS GRANTED.<br><br>Next Hint: Look into the #announcements channel pins. Year 2024.";
+            } else {
+                // 密碼錯誤時
+                messageDiv.className = "error";
+                messageDiv.innerHTML = "[-] INVALID KEY. ACCESS DENIED.";
+            }
+        }
+    </script>
+
+</body>
+</html>
