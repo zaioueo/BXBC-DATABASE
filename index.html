@@ -3,130 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAIN MENU</title>
+    <title>DATABASE Terminal - Key System</title>
+    <!-- 引入全域樣式表（維持全站十字準星、全螢幕載入優雅淡入） -->
+    <link rel="stylesheet" href="theme.css">
     <style>
-        body { background-color: #0c0805; color: #b37446; font-family: 'Courier New', monospace; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; box-sizing: border-box; overflow: hidden; }
-        .menu-container { text-align: center; border: 1px solid #b37446; padding: 40px; background-color: rgba(12, 8, 5, 0.95); max-width: 500px; width: 90%; animation: fadeInPanel 2s ease-in-out forwards, breatheGlow 5s ease-in-out infinite 2s; opacity: 0; }
-        .menu-container h1 { font-size: 24px; margin: 0 0 35px 0; letter-spacing: 2px; }
-        .login-box { display: flex; flex-direction: column; align-items: center; gap: 15px; }
-        .typewriter-text { font-size: 14px; margin-bottom: 15px; line-height: 1.5; min-height: 40px; }
-        .cursor { display: inline-block; width: 10px; background-color: #b37446; animation: blink 0.8s infinite; }
-        input { background-color: #050302; border: 1px solid #b37446; color: #b37446; padding: 10px; font-size: 16px; text-align: center; outline: none; width: 70%; }
-        .btn { background-color: #b37446; color: #0c0805; border: none; padding: 10px 25px; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .btn:hover { background-color: #59351c; color: #b37446; }
-        .error { color: #ff6666; margin-top: 15px; font-size: 14px; }
-        .success { color: #ffb066; margin-top: 15px; font-size: 14px; line-height: 1.6; }
-        .menu-options { display: none; flex-direction: column; gap: 15px; align-items: center; opacity: 0; transition: opacity 1s ease; width: 100%; }
-        .menu-link { display: block; width: 75%; background-color: transparent; border: 1px solid #b37446; color: #b37446; padding: 12px 20px; font-family: inherit; font-size: 14px; font-weight: bold; text-decoration: none; letter-spacing: 1px; transition: opacity 0.4s ease-in-out; opacity: 1; margin: 0 auto; }
-        .menu-link:hover { opacity: 0.15; }
-        @keyframes fadeInPanel { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
-        @keyframes breatheGlow { 0%, 100% { box-shadow: 0 0 15px rgba(179, 116, 70, 0.15); border-color: rgba(179, 116, 70, 0.5); } 50% { box-shadow: 0 0 35px rgba(179, 116, 70, 0.45); border-color: rgba(179, 116, 70, 1); } }
-        @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+        /* 解鎖容器主佈局 - 完美置中鎖定 */
+        .lobby-container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            width: 100%; 
+            height: calc(100vh - 100px); 
+            max-width: 800px; 
+            margin-top: 40px; 
+            border: 1px solid #b37446; 
+            background: rgba(12,8,5,0.95); 
+            padding: 40px; 
+            text-align: center; 
+            position: relative; 
+            overflow: hidden;
+            animation: breathe 5s infinite; 
+        }
+
+        /* 頂部 [ ACCESS RESTRICTED ] 狀態文字 */
+        .process-title {
+            font-size: 32px; 
+            color: #b37446;
+            margin: 0 0 15px 0;
+            letter-spacing: 4px;
+            font-family: "EB Garamond", serif !important;
+            text-transform: uppercase;
+        }
+
+        /* 提示引導小字 - 直接用純 CSS 穩定顯現，絕不卡死、不留黑線 */
+        .hint-text-box {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 45px;
+        }
+
+        .hint-text {
+            font-size: 14px;
+            color: #8c7361;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-family: "EB Garamond", serif !important;
+        }
+
+        /* 密碼輸入框 */
+        .key-input {
+            width: 100%;
+            max-width: 500px;
+            background: transparent;
+            border: 1px solid #b37446;
+            color: #e5bd9c;
+            padding: 16px 20px;
+            font-size: 20px; 
+            letter-spacing: 2px;
+            text-align: center;
+            outline: none;
+            margin-bottom: 30px;
+            cursor: text !important;
+            transition: all 0.25s ease;
+        }
+        
+        .key-input:focus { box-shadow: 0 0 15px rgba(179, 116, 70, 0.2); border-color: #e5bd9c; }
+        .key-input.input-error { border: 1px solid #ff3333 !important; color: #ff3333 !important; box-shadow: 0 0 20px rgba(255, 51, 51, 0.3) !important; }
+
+        /* 點擊按鈕 */
+        .submit-btn { width: 100%; max-width: 180px; background: #b37446; border: 1px solid #b37446; color: #0c0805; padding: 14px 20px; font-size: 15px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; transition: all 0.25s ease; }
+        .submit-btn:hover { background: transparent; color: #b37446; box-shadow: 0 0 20px rgba(179, 116, 70, 0.4); transform: scale(1.03); }
     </style>
 </head>
 <body>
 
-    <div class="menu-container">
-        <h1 id="title">[ Processing<span id="titleDots"></span> ]</h1>
+    <div class="lobby-container">
+        <!-- 頂部防禦代碼標題 -->
+        <h1 class="process-title">[ ACCESS RESTRICTED ]</h1>
         
-        <div id="loginSection" class="login-box">
-            <div class="typewriter-text" id="storyText"></div>
-            <input type="text" id="passwordInput" placeholder="Enter key...">
-            <button onclick="checkPassword()" class="btn">CLICK ME</button>
-            <div id="message"></div>
+        <!-- 提示文字盒 -->
+        <div class="hint-text-box">
+            <p class="hint-text">Search the key in #announcements, good luck!</p>
         </div>
 
-        <div id="menuSection" class="menu-options">
-            <a href="characters.html" class="menu-link">CHARACTERS</a>
-            <a href="lores.html" class="menu-link">LORES</a>
-            <a href="servers.html" class="menu-link">PHOTOS</a>
-            <a href="about.html" class="menu-link">SERVERS</a>
-            <a href="photos.html" class="menu-link">ABOUT US</a>
-        </div>
+        <!-- 密碼輸入方框 -->
+        <input type="text" id="terminal-key-field" class="key-input" placeholder="Enter key..." autocomplete="off">
+
+        <!-- 驗證按鍵 -->
+        <button onmouseenter="playHoverSound()" onclick="verifySystemKey()" class="submit-btn">CLICK ME</button>
     </div>
 
+    <!-- 💡 只引入全域共用的 menu.js 轉場引擎 -->
+    <script src="menu.js"></script>
+
     <script>
-        const textToType = "Search the key in #announcements, good luck!";
-        let index = 0, speed = 40;
-        let titleInterval; 
+        function verifySystemKey() {
+            const inputField = document.getElementById("terminal-key-field");
+            const keyValue = inputField.value.trim();
+            const CORRECT_KEY = "1983"; 
 
-        function startTitleDots() {
-            let titleDotCount = 0;
-            document.getElementById("title").innerHTML = "[ Processing<span id='titleDots'></span> ]";
-            titleInterval = setInterval(function() {
-                titleDotCount = (titleDotCount + 1) % 4;
-                document.getElementById("titleDots").innerHTML = ".".repeat(titleDotCount);
-            }, 500);
-        }
-
-        function startTypewriter() {
-            const target = document.getElementById("storyText");
-            if (index < textToType.length) {
-                target.innerHTML += textToType.charAt(index);
-                index++;
-                setTimeout(startTypewriter, speed);
-            } else {
-                target.innerHTML += '<span class="cursor">&nbsp;</span>';
-            }
-        }
-
-        // 🧠 核心修改：網頁載入時，先檢查玩家是否早就成功解鎖過
-        window.onload = function() { 
-            if (localStorage.getItem("db_unlocked") === "true") {
-                // 如果已經解鎖過，直接隱藏輸入框並展開大廳選單
-                document.getElementById("loginSection").style.display = "none";
-                document.getElementById("title").innerHTML = "[ LOBBY ]"; 
-                const menu = document.getElementById("menuSection");
-                menu.style.display = "flex";
-                menu.style.opacity = "1";
-            } else {
-                // 如果沒解鎖過，正常跑打字機和點點動畫
-                setTimeout(startTypewriter, 500); 
-                startTitleDots(); 
-            }
-        };
-
-        function checkPassword() {
-            const userInput = document.getElementById("passwordInput").value.toLowerCase().trim();
-            const messageDiv = document.getElementById("message");
-
-            if (userInput === "save them") {
-                clearInterval(titleInterval); 
-                document.getElementById("title").innerHTML = "[ SUCCESS ]";
-                messageDiv.className = "success";
-                messageDiv.innerHTML = "=== OVERRIDE SUCCESSFUL ===<br><br>Amazing.. I didn't expected that at all!<br>Loading<span id='loadingDots'></span>";
+            if (keyValue === CORRECT_KEY) {
+                playSuccessChime(); 
+                inputField.classList.remove("input-error");
                 
-                // 🧠 儲存解鎖狀態到瀏覽器中（只要不關閉瀏覽器或清除暫存，就會一直記住）
-                localStorage.setItem("db_unlocked", "true");
-
-                let dotCount = 0;
-                const dotInterval = setInterval(function() {
-                    dotCount = (dotCount + 1) % 4;
-                    document.getElementById("loadingDots").innerHTML = ".".repeat(dotCount);
+                if (document.body) {
+                    document.body.classList.remove("fade-in");
+                    document.body.classList.add("fade-out");
+                }
+                
+                // 💡 密碼正確，直接強行引導換頁至 lobby.html
+                setTimeout(() => {
+                    window.location.href = "lobby.html";
                 }, 400);
 
-                setTimeout(function() {
-                    clearInterval(dotInterval);   
-                    document.getElementById("loginSection").style.display = "none";
-                    document.getElementById("title").innerHTML = "[ LOBBY ]"; 
-                    const menu = document.getElementById("menuSection");
-                    menu.style.display = "flex";
-                    setTimeout(() => { menu.style.opacity = "1"; }, 50);
-                }, 2000);
-
             } else {
-                clearInterval(titleInterval); 
-                document.getElementById("title").innerHTML = "<span style='color: #ff6666;'>[ WRONG ]</span>";
-                messageDiv.className = "error";
-                messageDiv.innerHTML = "[-] INVALID KEY. ACCESS DENIED.";
-                
-                setTimeout(function() {
-                    if (document.getElementById("title").innerText !== "[ SUCCESS ]" && document.getElementById("title").innerText !== "[ LOBBY ]") {
-                        startTitleDots();
-                    }
-                }, 1500);
+                playAccessDeniedSound(); 
+                inputField.classList.add("input-error");
+                setTimeout(() => { inputField.classList.remove("input-error"); }, 800);
             }
         }
+
+        function playSuccessChime() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)(); const now = ctx.currentTime;
+                let o1 = ctx.createOscillator(), g1 = ctx.createGain(); o1.type = 'triangle'; o1.frequency.setValueAtTime(523.25, now); o1.frequency.setValueAtTime(659.25, now + 0.1); o1.frequency.setValueAtTime(783.99, now + 0.2); g1.gain.setValueAtTime(0.08, now); g1.gain.exponentialRampToValueAtTime(0.001, now + 0.4); o1.connect(g1); g1.connect(ctx.destination); o1.start(); o1.stop(now + 0.4);
+            } catch(e) {}
+        }
+
+        function playAccessDeniedSound() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)(); const now = ctx.currentTime;
+                let o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'sawtooth'; o.frequency.setValueAtTime(150, now); o.frequency.linearRampToValueAtTime(40, now + 0.35); g.gain.setValueAtTime(0.12, now); g.gain.exponentialRampToValueAtTime(0.001, now + 0.35); o.connect(g); g.connect(ctx.destination); o.start(); o.stop(now + 0.35);
+            } catch(e) {}
+        }
+
+        document.getElementById("terminal-key-field").addEventListener("keydown", (e) => {
+            if (e.key === "Enter") { verifySystemKey(); }
+        });
     </script>
 </body>
 </html>

@@ -1,0 +1,184 @@
+<!-- ==========================================
+     📄 lobby.html 最終提交版
+     ========================================== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 💡 核心修正：將 lobby.html 的分頁標題也同步更換為大寫的 CHARACTERS -->
+    <title>CHARACTERS</title>
+    <!-- 引入全域共用樣式表 -->
+    <link rel="stylesheet" href="theme.css">
+    <style>
+        .lobby-container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            width: 100%; 
+            height: calc(100vh - 100px); 
+            max-width: 800px; 
+            margin-top: 40px; 
+            border: 1px solid #b37446; 
+            background: rgba(12,8,5,0.95); 
+            padding: 40px; 
+            text-align: center; 
+            position: relative; 
+            overflow: hidden;
+            animation: breathe 5s infinite; 
+        }
+
+        .lobby-header-group { 
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 10;
+            opacity: 1;
+            transform: translate(-50%, 0);
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        
+        .lobby-header-group.fnf-hide { 
+            opacity: 0 !important; 
+            transform: translate(-50%, -20px) scale(0.95) !important; 
+        }
+
+        .lobby-title { 
+            font-size: 32px; 
+            color: #b37446; 
+            margin: 0; 
+            letter-spacing: 4px; 
+            width: 100%;
+            text-align: center !important;
+            display: block;
+        }
+
+        .directory-box { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+            width: 100%; 
+            max-width: 500px; 
+            margin: 0 auto; 
+            position: relative; 
+        }
+        
+        .dir-btn { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            width: 100%; 
+            background: transparent; 
+            padding: 22px 16px;       
+            font-size: 20px;          
+            font-weight: bold; 
+            letter-spacing: 3px;      
+            border: 1px solid #b37446;
+            color: #b37446;
+            text-transform: uppercase; 
+            text-decoration: none; 
+            position: relative; 
+            transform-origin: center center; 
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease; 
+        }
+
+        .dir-btn:hover { 
+            background: #b37446; 
+            color: #0c0805; 
+            box-shadow: 0 0 20px rgba(179, 116, 70, 0.4); 
+            transform: scale(1.04); 
+        }
+        
+        .dir-btn.fnf-fade-out, .lock-system-btn.fnf-hide { 
+            opacity: 0 !important; 
+            transform: scale(0.85) !important; 
+            pointer-events: none !important; 
+        }
+        
+        .directory-box .dir-btn.fnf-fade-out {
+            opacity: 0 !important;
+            filter: brightness(0) !important;
+            transform: scale(0.85) !important;
+        }
+        
+        .dir-btn.fnf-selected { 
+            pointer-events: none; 
+            z-index: 99; 
+            background: #b37446 !important;
+            color: #0c0805 !important;
+            box-shadow: 0 0 25px rgba(179, 116, 70, 0.6) !important;
+        }
+        
+        .lock-system-btn { 
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: transparent;
+            border: 1px solid #b37446;
+            color: #b37446;
+            padding: 8px 18px;
+            font-size: 13px;
+            font-family: "Times New Roman", serif !important;
+            letter-spacing: 2px;
+            text-decoration: none;
+            text-transform: uppercase;
+            z-index: 10;
+            opacity: 1;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, color 0.2s ease;
+        }
+        .lock-system-btn:hover {
+            background: #b37446;
+            color: #0c0805;
+            box-shadow: 0 0 15px rgba(179, 116, 70, 0.3);
+        }
+        .lock-system-btn.fnf-hide {
+            opacity: 0 !important;
+            transform: translate(-50%, 20px) scale(0.95) !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lobby-container">
+        <div class="lobby-header-group" id="fnf-header">
+            <h1 class="lobby-title">[ LOBBY ]</h1>
+        </div>
+
+        <div class="directory-box" id="fnf-box">
+            <a onmouseenter="playHoverSound()" onclick="fnfNavigate(this, 'characters.html')" class="dir-btn">CHARACTERS</a>
+            <a onmouseenter="playHoverSound()" onclick="fnfNavigate(this, 'lores.html')" class="dir-btn lock-btn">LORES</a>
+            <a onmouseenter="playHoverSound()" onclick="fnfNavigate(this, 'photos.html')" class="dir-btn lock-btn">PHOTOS</a>
+            <a onmouseenter="playHoverSound()" onclick="fnfNavigate(this, 'servers.html')" class="dir-btn lock-btn">SERVERS</a>
+            <a onmouseenter="playHoverSound()" onclick="fnfNavigate(this, 'about.html')" class="dir-btn lock-btn">ABOUT US</a>
+        </div>
+
+        <!-- 💡 核心修正：點擊 Lock System 時，改為呼叫專門的全新強退函式 forceLockOut()，解開之前被 menu.js 底層死鎖的攔截限制！ -->
+        <a onclick="forceLockOut()" class="lock-system-btn" id="fnf-back">[ LOCK SYSTEM ]</a>
+    </div>
+
+    <script src="menu.js"></script>
+    <script>
+        // 💡 核心新增：專門解開底層攔截器用的強制登出程式碼，讓 Lock System 100% 絕對能退回 index.html 密碼鎖
+        function forceLockOut() {
+            if (document.body) {
+                document.body.style.opacity = "0";
+                document.body.classList.remove("fade-in");
+                document.body.classList.add("fade-out");
+            }
+            setTimeout(() => {
+                // 改用最高權限的 location.replace 強行物理切換路由，繞過全站共用攔截，徹底修復無法返回的 Bug！
+                window.location.replace("index.html");
+            }, 450);
+        }
+    </script>
+</body>
+</html>

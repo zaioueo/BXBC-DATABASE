@@ -1,0 +1,210 @@
+<!-- ==========================================
+     📄 dead.html 最終提交版
+     ========================================== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHARACTERS</title>
+    <link rel="stylesheet" href="theme.css">
+    <style>
+        .lobby-container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            width: 100%; 
+            height: calc(100vh - 100px); 
+            max-width: 800px; 
+            margin-top: 40px; 
+            border: 1px solid #9e3b30; 
+            background: rgba(12,8,5,0.95); 
+            padding: 40px; 
+            text-align: center; 
+            position: relative; 
+            overflow: hidden;
+            animation: redBreathe 5s infinite; 
+        }
+
+        .audio-toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 1px dashed #9e3b30;
+            color: #9e3b30;
+            padding: 6px 12px;
+            font-size: 11px;
+            font-family: "EB Garamond", serif !important;
+            letter-spacing: 1px;
+            z-index: 100;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateX(10px) scale(0.95);
+            animation: elementFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+        }
+        .audio-toggle-btn:hover {
+            color: #ff3333;
+            border-color: #ff3333;
+            background: rgba(255, 51, 51, 0.05);
+        }
+        
+        .audio-toggle-btn.fnf-hide {
+            opacity: 0 !important;
+            transform: scale(0.85) translateX(10px) !important;
+            pointer-events: none !important;
+        }
+
+        .lobby-header-group { 
+            position: absolute;
+            top: 40px; 
+            left: 50%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 10;
+            opacity: 0;
+            transform: translate(-50%, -15px) scale(0.98);
+            animation: headerFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        
+        .lobby-header-group.fnf-hide { 
+            opacity: 0 !important; 
+            transform: translate(-50%, -20px) scale(0.95) !important; 
+        }
+
+        .lobby-subtitle { 
+            font-size: 15px; 
+            color: #8c665e; 
+            margin: 0; 
+            letter-spacing: 1.5px; 
+            text-transform: uppercase; 
+            width: 100%;
+            text-align: center !important; 
+            display: block;
+        }
+
+        .directory-box { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+            width: 100%; 
+            max-width: 550px; 
+            margin: 0 auto; 
+            position: relative; 
+            opacity: 0;
+            transform: scale(0.97);
+            animation: elementFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
+        }
+        
+        .dir-btn { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            width: 100%; 
+            background: transparent; 
+            padding: 16px 16px; 
+            border: 1px solid #9e3b30; 
+            color: #9e3b30; 
+            text-decoration: none; 
+            position: relative; 
+            transform-origin: center center; 
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease; 
+        }
+
+        .char-name { font-size: 20px; font-weight: bold; letter-spacing: 3px; text-transform: uppercase; }
+        .char-status { font-size: 11px; letter-spacing: 2px; color: #7a3e37; margin-top: 4px; text-transform: uppercase; }
+
+        .dir-btn:hover { background: #ff3333; border-color: #ff3333; color: #0c0805; box-shadow: 0 0 20px rgba(255, 51, 51, 0.4); transform: scale(1.03); }
+        .dir-btn:hover .char-status { color: #0c0805; opacity: 0.8; }
+        
+        .dir-btn.fnf-fade-out { opacity: 0 !important; transform: scale(0.85) !important; pointer-events: none; }
+        
+        .dir-btn.fnf-selected { 
+            pointer-events: none; 
+            z-index: 99; 
+            background: #ff3333 !important;
+            border-color: #ff3333 !important;
+            color: #0c0805 !important;
+            box-shadow: 0 0 25px rgba(255, 51, 51, 0.6) !important;
+        }
+        .dir-btn.fnf-selected .char-status { color: #0c0805 !important; }
+        
+        .back-lobby-btn { 
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            color: #8c665e; 
+            font-size: 12px; 
+            letter-spacing: 1.5px; 
+            text-decoration: none; 
+            border-bottom: 1px dashed transparent; 
+            z-index: 10;
+            text-transform: uppercase; 
+            opacity: 0;
+            transform: translate(-50%, 15px) scale(0.98);
+            animation: footerFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease; 
+        }
+        .back-lobby-btn:hover { color: #ff3333; border-bottom-color: #ff3333; }
+        
+        .back-lobby-btn.fnf-hide { 
+            opacity: 0 !important; 
+            transform: translate(-50%, 20px) scale(0.95) !important; 
+            pointer-events: none !important; 
+        }
+
+        @keyframes redBreathe { 0%, 100% { box-shadow: 0 0 15px rgba(158, 59, 48, 0.15); } 50% { box-shadow: 0 0 35px rgba(158, 59, 48, 0.45); } }
+        @keyframes headerFadeIn { from { opacity: 0; transform: translate(-50%, -15px) scale(0.98); } to { opacity: 1; transform: translate(-50%, 0px) scale(1); } }
+        @keyframes footerFadeIn { from { opacity: 0; transform: translate(-50%, 15px) scale(0.98); } to { opacity: 1; transform: translate(-50%, 0px) scale(1); } }
+        @keyframes elementFadeIn { from { opacity: 0; transform: translateY(0px) scale(0.96); } to { opacity: 1; transform: translateY(0px) scale(1); } }
+    </style>
+</head>
+<body>
+    <div class="lobby-container">
+        <button onclick="toggleMusicState()" class="audio-toggle-btn" id="music-toggle-text">MUSIC: ON</button>
+        <div class="lobby-header-group" id="fnf-header">
+            <p class="lobby-subtitle">Select a character to remember them.</p>
+        </div>
+        <div class="directory-box" id="fnf-box">
+            <a onmouseenter="playHoverSound()" onclick="fnfNavigate(this, 'bonabi.html')" class="dir-btn">
+                <span class="char-name">HOLLY CALLAHAN</span>
+                <span class="char-status">[ POSSESSED ]</span>
+            </a>
+            <a onmouseenter="playHoverSound()" onclick="fnfNavigate(this, 'mangle.html')" class="dir-btn">
+                <span class="char-name">TRIXIE SHERMAN</span>
+                <span class="char-status">[ DAMAGED ]</span>
+            </a>
+            <a onmouseenter="playHoverSound()" onclick="fnfNavigate(this, 'joshua.html')" class="dir-btn">
+                <span class="char-name">JOSHUA WOODSIDE</span>
+                <span class="char-status">[ FUSED ]</span>
+            </a>
+            <a onmouseenter="playHoverSound()" onclick="fnfNavigate(this, 'oscar.html')" class="dir-btn">
+                <span class="char-name">OSCAR WOODSIDE</span>
+                <span class="char-status">[ ENTERTAINER ]</span>
+            </a>
+            <a onmouseenter="playHoverSound()" onclick="fnfNavigate(this, 'victor.html')" class="dir-btn">
+                <span class="char-name">VICTOR CALLAHAN</span>
+                <span class="char-status">[ MEDIATOR ]</span>
+            </a>
+        </div>
+        <a onclick="fadeTo('characters.html')" class="back-lobby-btn" id="fnf-back">&lt; Return to Characters</a>
+    </div>
+    <script src="menu.js"></script>
+    <script>
+        const originalFnfNavigate = fnfNavigate;
+        fnfNavigate = function(clickedElement, targetUrl) {
+            const audioBtn = document.getElementById('music-toggle-text');
+            if (audioBtn) audioBtn.classList.add('fnf-hide'); 
+            originalFnfNavigate(clickedElement, targetUrl);
+        };
+    </script>
+</body>
+</html>
